@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="../css/select2-bootstrap4.min.css" />
 
   <link rel="stylesheet" href="../css/slick-animation.css" />
+  <link rel="stylesheet" href="../css/watch.css">
   <link rel="stylesheet" href="../style.css" />
   <link rel="shortcut icon" href="../images/header-logo.png" type="image/x-icon">
 </head>
@@ -162,6 +163,10 @@
     </div>
   </header>
   <section id="home" class="iq-main-slider p-0">
+    <div id="video-overlay" class="vid-overlay" style="display:none">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen id="video-iframe"></iframe>
+      <span class="close-button" onclick="closeshow()">X</span>
+    </div>
     <div id="home-slider" class="slider m-0 p-0">
       <div class="slide slick-bg s-bg-1">
         <div class="container-fluid position-relative h-100">
@@ -184,7 +189,7 @@
                     <span class="text-white ml-2" id="movierating">7.3(imbd)</span>
                   </div>
                   <div class="d-flex align-items-center mt-2 mt-md-3">
-                    <span class="badge badge-secondary p-2" id="agerating">Not Adult</span>
+                    <span class="badge badge-secondary p-2" id="agerating">PG</span>
                   </div>
                 </div>
                 <p data-animation-in="fadeInUp">

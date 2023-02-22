@@ -1,0 +1,27 @@
+.vid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .vid-overlay iframe {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    height: 90%;
+    width: 90%;
+    border: none;
+  }
+
+  .vid-overlay .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 34px;
+    color: white;
+    cursor: pointer;
+  }
