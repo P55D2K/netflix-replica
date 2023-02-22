@@ -25,15 +25,16 @@ let movierating = document.getElementById('movierating');
 let agerating = document.getElementById('agerating');
 let genres = document.getElementById('genres');
 
-function sortbydescendingid(_list) {
-    let _newlist = _list;
-    let idarranged = [];
-    for (let i = 0; i < _list.length; i++) {
-        idarranged.push(_list[i].id);
-    }
-    console.log(idarranged);
-    console.log(_newlist);
-    idarranged = (idarranged.slice().sort((a, b) =>  a - b)).reversed();
+async function getmoviebyid(id) {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=b08ef18e709931a1e3de3ab143ed2d2c&language=en-US&append_to_response=release_dates`);
+    const data = await response.json();
+    return data;
+}
+
+async function getmovieagerating(id) {
+    const data = await getmoviebyid(id);
+    const certification = data.release_dates.results.find(country => country.iso_3166_1 === 'US').release_dates[0].certification;
+    return certification;
 }
 
 function replacemovieplay(_movielink) {
@@ -41,13 +42,7 @@ function replacemovieplay(_movielink) {
 }
 
 function bodystart() {
-    fetch(apiEndpoint + 'avengers')
-        .then(response => response.json())
-        .then(data => {
-            movies = data.results;
-            console.log(movies);
-            sortbydescendingid(movies);
-        });
+    getmovieagerating(105).then(certification => console.log(certification));
 }
 
 window.onload = function() {

@@ -6,5 +6,5 @@ function search() {
   if(searchQuery == "")
     return
 
-  window.location.href = "search/search.html?s=" + searchQuery;
+  window.location.href = "search/index.html?s=" + searchQuery;
 }

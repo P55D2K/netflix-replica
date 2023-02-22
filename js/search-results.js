@@ -48,6 +48,12 @@ function searchfr() {
             for (let i = 0; i < movies.length; i++) {
                 if(movies[i].adult == true)
                     continue
+                if(movies[i].title == null)
+                    continue
+                if(movies[i].release_date == null || movies[i].release_date == "null" || movies[i].release_date == "" || movies[i].release_date == " " || parseInt(movies[i].release_date.substring(0, 4)) < 1900 || parseInt(movies[i].release_date.substring(0, 4)) > new Date().getFullYear())
+                    continue
+
+                let toadd = "";
                 if(movies[i].poster_path == "null" || movies[i].poster_path == null)
                     toadd = replacemoviecard("../watch/index.html?id=" + movies[i].id, movies[i].release_date.substring(0, 7), ("https://via.placeholder.com/300x445.png?text=Movie%20Poster%20Not%20Avaliable"), movies[i].title, (movies[i].vote_average.toFixed(1) + "/10"));
                 else
