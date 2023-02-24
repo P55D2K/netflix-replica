@@ -139,16 +139,6 @@
                               </div>
                             </div>
                           </a>
-                          <a href="../../Homepage/index.html" class="iq-sub-card setting-dropdown">
-                            <div class="media align-items-center">
-                              <div class="right-icon">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                              </div>
-                              <div class="media-body ml-3">
-                                <h6 class="mb-0">Back to Kai Websites</h6>
-                              </div>
-                            </div>
-                          </a>
                         </div>
                       </div>
                     </div>
@@ -163,8 +153,12 @@
     </div>
   </header>
   <section id="home" class="iq-main-slider p-0">
+    <div id="trailer-overlay" class="vid-overlay" style="display:none">
+      <iframe src="https://www.youtube.com/embed/Rpkjb4Tx844" frameborder="0" allowfullscreen id="trailer-iframe"></iframe>
+      <span class="close-button" onclick="closetrailer()">X</span>
+    </div>
     <div id="video-overlay" class="vid-overlay" style="display:none">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen id="video-iframe"></iframe>
+      <iframe src="" frameborder="0" allowfullscreen id="video-iframe" allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe>
       <span class="close-button" onclick="closeshow()">X</span>
     </div>
     <div id="home-slider" class="slider m-0 p-0">
@@ -173,7 +167,7 @@
           <div class="slider-inner h-100">
             <div class="row align-items-center h--100">
               <div class="col-xl-6 col-lg-12 col-md-12">
-                <a href="../javascript:void(0)">
+                <a href="javascript:void(0)">
                   <div class="channel-logo" data-animation-in="fadeInLeft" data-delay-in="0.5">
                     <img src="../images/logo.png" class="c-logo" alt="" />
                   </div>
@@ -204,7 +198,7 @@
               </div>
             </div>
             <div class="col-xl-5 col-lg-12 col-md-12 trailor-video">
-              <a href="../video/trailer.mp4" class="video-open playbtn">
+              <a class="video-open playbtn" onclick="watchtrailer()" href="javascript:void(0)">
                 <img src="../images/play.png" class="play" alt="" />
                 <span class="w-trailor">Watch Trailer</span>
               </a>

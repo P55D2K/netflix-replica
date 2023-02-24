@@ -14,9 +14,10 @@ const halfStarCode = "<li><i class='fa fa-star-half'></i></li>";
 
 const urlParams = new URLSearchParams(window.location.search);
 let trailerlink = urlParams.get('trailerlink');
+let trailer = urlParams.get('trailer'); 
+let js = urlParams.get('js');
 let id = urlParams.get('id');
 
-let watchplaybutton = document.getElementById('watch-play-btn');
 let ratingstars = document.getElementById('ratingstars');
 let movierating = document.getElementById('movierating');
 let agerating = document.getElementById('agerating');
@@ -40,46 +41,62 @@ async function importdata() {
       .then(jsonData => jsonData);
 }
 
-function openshow(ismovie) {
+async function importtrailerdata() {
+    return fetch('../json/idtrailerlink.json')
+      .then(response => response.json())
+      .then(jsonData => jsonData);
+}
+
+function openshow() {
     document.getElementById("video-overlay").style.display = "block";
-    if(ismovie) {
-        importdata().then(datafromidlink => {
-            document.getElementById("video-overlay").innerHTML = '<iframe src="' + datafromidlink[id] + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><span class="close-button" onclick="closeshow()">X</span>';
-        });
-    } else {
-        document.getElementById("video-overlay").innerHTML = '<iframe src="' + trailerlink + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><span class="close-button" onclick="closeshow()">X</span>';
-    }
 }
 
 function closeshow() {
     document.getElementById("video-overlay").style.display = "none";
-    console.log(datafromidlink);
-    alert("hi");
-    importdata().then(datafromidlink => {
-        document.getElementById("video-overlay").innerHTML = '<iframe src="' + datafromidlink[id] + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><span class="close-button" onclick="closeshow()">X</span>';
-    });
+}
+
+function closetrailer() {
+    document.getElementById("trailer-overlay").style.display = "none";
+}
+
+function watchtrailer() {
+    document.getElementById("trailer-overlay").style.display = "block";
 }
 
 function bodystart() {
+    if(js == "false")
+        return;
+
+    if(trailer == "false" || trailer == null)
+        document.getElementById("trailer-overlay").style.display = "none";
+    else
+        document.getElementById("trailer-overlay").style.display = "block";
+
     let moviedetails = getmoviebyid(id);
     let cnfrmedagerating = getmovieagerating(id);
 
     moviedetails.then(function(data) {
-        importdata().then(datafromidlink => {
-            if(trailerlink != null)
-                insertmovieplay.innerHTML = '<button class="btn btn-hover iq-button" onclick="openshow(false)"><i class="fa fa-play mr-3"></i>Play Now</button>';
-            if(trailerlink == null)
-                insertmovieplay.innerHTML = '<button class="btn btn-hover iq-button" onclick="openshow(true)"><i class="fa fa-play mr-3"></i>Play Now</button>';
-        });
+        console.log(data );
 
+        insertmovieplay.innerHTML = '<button class="btn btn-hover iq-button" onclick="openshow()"><i class="fa fa-play mr-3"></i>Play Now</button>';
+        importdata().then(datafromidlink => {
+            console.log(id);
+            console.log(datafromidlink[id]);
+            document.getElementById("video-overlay").innerHTML = '<iframe src="' + datafromidlink[id] + '" frameborder="0" allowfullscreen id="video-iframe" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe><span class="close-button" onclick="closeshow()">X</span>'
+        });
+        
+        movierating.innerText = data.vote_average;
         cnfrmedagerating.then(function (_agerating) {
             agerating.innerText = _agerating;
         }).catch(function(error) {
             console.error(error);
         });
-
     }).catch(function(error) {
         console.error(error);
+    });
+
+    importtrailerdata().then(trailerlink => {
+        document.getElementById("trailer-overlay").innerHTML = "<iframe src='" + trailerlink[id] + "'frameborder='0' allow='accelerometer; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe><span class='close-button' onclick='closetrailer()'>X</span>";
     });
 }
 
