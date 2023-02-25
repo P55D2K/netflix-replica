@@ -4,16 +4,13 @@ const apiEndpoint = "https://api.themoviedb.org/3/search/movie?api_key=b08ef18e7
 // API endpoint for retrieving images
 const apiEndpointImages = "https://image.tmdb.org/t/p/original";
 
-// API endpoint for movie genres
-const apiGenres = "https://api.themoviedb.org/3/genre/tv/list?api_key=b08ef18e709931a1e3de3ab143ed2d2c&language=en-US";
-
 const urlParams = new URLSearchParams(window.location.search);
 
 let searched = urlParams.get('s');
 let mainsearchbar = document.getElementById('mainsearchbar');
 
-let moviecard = '<div class="movie"><a href="{movielink}"><div><p>{movieyear}</p></div><div><img src="{movieposter}" alt="{movietitle}" /></div><div><span>{movietype}</span><h3>{movietitle}</h3></div></a></div>'
-let movies = []
+let moviecard = '<div class="movie"><a href="{movielink}"><div><p>{movieyear}</p></div><div><img src="{movieposter}" alt="{movietitle}" /></div><div><span>{movietype}</span><h3>{movietitle}</h3></div></a></div>';
+let movies = [];
 
 function replacemoviecard(movielink, movieyear, movieposter, movietitle, movietype) {
     let editedmc = moviecard.replace('{movielink}', movielink);

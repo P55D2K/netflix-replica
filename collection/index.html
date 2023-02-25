@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Watch | Netflix Replica</title>
+  <title>Search | Netflix Replica</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="../css/slick.css" />
@@ -15,14 +15,13 @@
   <link rel="stylesheet" href="../css/magnific-popup.css" />
   <link rel="stylesheet" href="../css/select2.min.css" />
   <link rel="stylesheet" href="../css/select2-bootstrap4.min.css" />
-
+  <link rel="stylesheet" href="../css/movie-card.css" />
   <link rel="stylesheet" href="../css/slick-animation.css" />
-  <link rel="stylesheet" href="../css/watch.css">
   <link rel="stylesheet" href="../style.css" />
   <link rel="shortcut icon" href="../images/header-logo.png" type="image/x-icon">
 </head>
 
-<body onload="bodystart();">
+<body onload="searchload()">
   <header id="main-header">
     <div class="main-header">
       <div class="container-fluid">
@@ -81,11 +80,11 @@
                       <i class="fa fa-search" id="search-button"></i>
                     </a>
                     <div class="search-box iq-search-bar d-search">
-                      <form action="#" class="searchbox" onsubmit="search()">
+                      <form action="#" class="searchbox">
                         <div class="form-group position-relative">
                           <input type="text" class="text search-input font-size-12" id="search-input"
-                            placeholder="type here to search..." onkeydown="if(event.keyCode==13){search();return false;}" />
-                          <i class="search-link fa fa-search" id="search-button" onclick="search()"></i>
+                            placeholder="type here to search..." />
+                          <i class="search-link fa fa-search"></i>
                           <div id="results"></div>
                         </div>
                       </form>
@@ -152,78 +151,15 @@
       </div>
     </div>
   </header>
-  <section id="home" class="iq-main-slider p-0">
-    <div id="trailer-overlay" class="vid-overlay" style="display:none">
-      <iframe src="https://www.youtube.com/embed/Rpkjb4Tx844" frameborder="0" allowfullscreen id="trailer-iframe"></iframe>
-      <span class="close-button" onclick="closetrailer()">X</span>
-    </div>
-    <div id="video-overlay" class="vid-overlay" style="display:none">
-      <iframe src="" frameborder="0" allowfullscreen id="video-iframe" allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'></iframe>
-      <span class="close-button" onclick="closeshow()">X</span>
-    </div>
-    <div id="home-slider" class="slider m-0 p-0">
-      <div class="slide slick-bg s-bg-1 changethisbg" id="changebg" style="background:#000;">
-        <div class="container-fluid position-relative h-100">
-          <div class="slider-inner h-100">
-            <div class="row align-items-center h--100">
-              <div class="col-xl-6 col-lg-12 col-md-12">
-                <a href="javascript:void(0)">
-                  <div class="channel-logo" data-animation-in="fadeInLeft" data-delay-in="0.5">
-                    <img src="../images/logo.png" class="c-logo" alt="" />
-                  </div>
-                </a>
-                <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft"
-                  data-delay-in="0.6" id="movietitle" style="font-size:50px;">
-                  {moviename}
-                </h1>
-                <div class="d-flex flex-wrap align-items-center fadeInLeft animated" data-animation-in="fadeInLeft"
-                  style="opacity: 1">
-                  <div class="slider-ratting d-flex align-items-center mr-4 mt-2 mt-md-3">
-                    <ul class="ratting-start p-0 m-0 list-inline text-primary d-flex align-items-center justify-content-left" id="ratingstars"></ul>
-                    <span class="text-white ml-2" id="movierating">{movierating}</span>
-                  </div>
-                  <div class="d-flex align-items-center mt-2 mt-md-3">
-                    <span class="badge badge-secondary p-2" id="agerating">{movieagerating}</span>
-                  </div>
-                </div>
-                <p data-animation-in="fadeInUp" id="movieoverview">
-                  {movieoverview}
-                </p>
-                <div class="trending-list" data-animation-in="fadeInUp" data-delay-in="1.2">
-                  <div class="text-primary title genres">
-                    Genres: <span class="text-body" id="genres"></span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center r-mb-23 mt-4" data-animation-in="fadeInUp" data-delay-in="1.2" id="insertmovieplay"></div>
-              </div>
-            </div>
-            <div class="col-xl-5 col-lg-12 col-md-12 trailor-video">
-              <a class="video-open playbtn" onclick="watchtrailer()" href="javascript:void(0)">
-                <img src="../images/play.png" class="play" alt="" />
-                <span class="w-trailor">Watch Trailer</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-  </section>
+
+  <!-- main content starts  -->
   <div class="main-content">
-    <section id="iq-favorites">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-12 overflow-hidden">
-            <div class="iq-main-header d-flex align-items-center justify-content-between">
-              <h4 class="main-title">Movie Collection</h4>
-              <a href="javascript:void(0)" class="iq-view-all" onclick="viewcollection()">View Collection</a>
-            </div>
-            <div class="favorite-contens">
-              <ul class="favorites-slider list-inline row p-0 mb-0 collection-slider"></ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <h1 id="results-header" style="color:#fff;margin-top:100px;margin-left:100px;font-size:3rem;">Movie Collection: </h1>
+    <div id="results-movies"></div>
   </div>
+
+  <!-- main content ends  -->
+
 
   <footer class="iq-bg-dark">
     <div class="footer-top">
@@ -301,20 +237,6 @@
   <script src="../js/slick-animation.min.js"></script>
 
   <script src="../js/main.js"></script>
-  <script src="../js/watch.js"></script>
-  
-  <script>
-    const searchInput = $("#search-input");
-
-    function search() {
-      const searchQuery = searchInput.val();
-
-      if(searchQuery == "")
-        return
-
-      window.location.href = "../search/index.html?s=" + searchQuery;
-    }
-  </script>
 </body>
 
 </html>
