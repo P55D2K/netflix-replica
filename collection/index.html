@@ -20,8 +20,18 @@
   <link rel="stylesheet" href="../style.css" />
   <link rel="shortcut icon" href="../images/header-logo.png" type="image/x-icon">
 </head>
-
-<body onload="searchload()">
+<style>
+    #collectionmovies {
+    margin-top: 20px;
+    margin-left: 100px;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    }   
+</style>
+<body onload="bodystart()">
   <header id="main-header">
     <div class="main-header">
       <div class="container-fluid">
@@ -80,14 +90,14 @@
                       <i class="fa fa-search" id="search-button"></i>
                     </a>
                     <div class="search-box iq-search-bar d-search">
-                      <form action="#" class="searchbox">
-                        <div class="form-group position-relative">
-                          <input type="text" class="text search-input font-size-12" id="search-input"
-                            placeholder="type here to search..." />
-                          <i class="search-link fa fa-search"></i>
-                          <div id="results"></div>
-                        </div>
-                      </form>
+                        <form action="#" class="searchbox" onsubmit="search()">
+                            <div class="form-group position-relative">
+                              <input type="text" class="text search-input font-size-12" id="search-input"
+                                placeholder="type here to search..." onkeydown="if(event.keyCode==13){search();return false;}" />
+                              <i class="search-link fa fa-search" id="search-button" onclick="search()"></i>
+                              <div id="results"></div>
+                            </div>
+                        </form>
                     </div>
                   </li>
                   <li class="nav-item nav-icon">
@@ -154,8 +164,8 @@
 
   <!-- main content starts  -->
   <div class="main-content">
-    <h1 id="results-header" style="color:#fff;margin-top:100px;margin-left:100px;font-size:3rem;">Movie Collection: </h1>
-    <div id="results-movies"></div>
+    <h1 id="moviecollectionheader" style="color:#fff;margin-top:100px;margin-left:100px;font-size:3rem;">{collectionname}</h1>
+    <div id="collectionmovies"></div>
   </div>
 
   <!-- main content ends  -->
@@ -237,6 +247,19 @@
   <script src="../js/slick-animation.min.js"></script>
 
   <script src="../js/main.js"></script>
+  <script src="../js/collection.js"></script>
+  <script>
+    const searchInput = $("#search-input");
+
+    function search() {
+      const searchQuery = searchInput.val();
+
+      if(searchQuery == "")
+        return
+
+      window.location.href = "../search/index.html?s=" + searchQuery;
+    }
+  </script>
 </body>
 
 </html>
